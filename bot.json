@@ -1,0 +1,34 @@
+{
+  "id": "53131b40-83f6-4eb8-b7b9-a464d2e8c611",
+  "name": "ADA_School_Similar",
+  "description": null,
+  "default_flow": "Introduction",
+  "flows": [
+    {
+      "name": "Introduction",
+      "description": null,
+      "commands": []
+    },
+    {
+      "name": "workshop",
+      "commands": []
+    }
+  ],
+  "files": [],
+  "functions": [
+    {
+      "name": "Similar",
+      "description": null,
+      "args": [
+        "query"
+      ],
+      "import_url": null,
+      "runtime": "nodejs12.x",
+      "handler": "index.handler",
+      "environment": {},
+      "app_id": null,
+      "version": null
+    }
+  ],
+  "apps": []
+}

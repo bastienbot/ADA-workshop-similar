@@ -1,0 +1,36 @@
+// Ceci est un commentaire, ils commencent tous par //
+// Le CSML ignore les commentaires, ils sont utiles pour les développeurs :3
+
+// Un chatbot commence toujours par l'étape "start" ci-dessous
+start:
+	say "Salut je suis ton assistant de recherche netflix !"
+  // Une fois qu'on a dit bonjour à l'utilisateur, on va lui demande ce qu'il veut voire
+  // direction l'étape "what_type", on utilise "goto" pour se déplacer entre les étapes
+	goto what_type
+
+what_type:
+  // On pose une question et on ajoute trois boutons
+	say Question("Qu'est-ce que tu recherches ?",
+	buttons=[
+    // Vous remarquerez qu'on utilise le mot clé "as", il permet au csml de se souvenir de ce bouton
+    // pour s'en servir plus tard (dans le if)
+		Button("Un film 🎬") as btnmovie,
+		Button("Une série 👮‍♂️") as btnserie,
+		Button("J'aime tout 😍") as btnany
+		])
+  // "hold" indique au chatbot qu'il doit attendre une réponse de l'utilisateur (une phrase ou un click)
+	hold
+  // La réponse de l'utilisateur va arriver dans la variable "event"
+  // Dans le cas présent on va voir ce que contient cette variable en demandant au csml si event "match" le bouton film
+	if (event match btnmovie) {
+    // Si l'utilisateur a cliqué sur le bouton film, on va demander au csml de se souvenir du mot "movie"
+    // Nous nous en servirons plus tard ;)
+		remember movie_type = "movie"
+	}
+	else if (event match btnserie) {
+		remember movie_type = "serie"
+	} else {
+    remember movie_type = "any"
+  }
+	say "Je me rappellerai de : {{movie_type}}"
+  goto end

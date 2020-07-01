@@ -1,0 +1,61 @@
+start:
+	say "Salut je suis ta conseillère musicale 👩‍🎤, je connais tous les groupes de musique !"
+  goto name
+
+name:
+  say Question("Avant tout faisons connaissance, comment tu t'appelles ?",
+    buttons=[
+      Button("Je suis anonyme 🏴‍☠️") as btnanon
+    ])
+  hold
+  if (event match btnanon) {
+    say "Ok, ok, pas de soucis, on peut quand même bien s'entendre 👊"
+  } else {
+    remember name = event
+  }
+  goto which_artist
+
+// ############################################################
+// À toi de jouer maintenant, il va falloir remplir les trous !
+// ############################################################
+which_artist:
+	say Question("Quel artistes aimes tu ? Voici quelques exemples :",
+	buttons=[
+		Button("Billie Eilish 👩‍🦰") as btnbillie,
+		Button("Eminem 👌") as btneminem,
+		Button("Nina Simone 🎷") as btnnina
+		])
+  // 1 - Maintenant qu'on a posé la question, il faut donner l'ordre au chatbot d'attendre la réponse
+	?????
+  // 2 - Mets le nom du bouton pour que le chatbot reconnaisse Billie Eilish
+	if (event match ????? ) {
+		remember artist = "billie"
+	} else if (event match btneminem) {
+    // 3 - Il manque un mot pour que le chatbot se souvienne d'eminem, retrouve le
+		????? artist = "eminem"
+    
+  // 4 - Ci-dessous, il manque carrément tout le bloc concernant Nina Simone 😱
+	} else if ( ????? ????? ????? ) {
+    ????? ????? ????? ?????
+  } else {
+    // 5 - Maintenant, si l'utilisateur a entré un.e artiste différent.e on veut s'en souvenir
+    // Complete la ligne ci-dessous
+    remember artist = ?????
+  }
+  goto display
+
+display:
+  // 6 - Remplace ci-dessous les mots avec les variables
+  do res = Fn("Similar", query= artist )
+  do cards = []
+  if (!res || res == {} || res.length() == 0) {
+    say "Je n'ai pas trouvé d'artiste', désolé 😔"
+  }
+  say "Voici quelques artistes similaires 🤩"
+  foreach (val, index) in res {
+    say "{{index + 1}}: {{val.name}}"
+    say Video(val.youtube)
+    say Typing(5000)
+    if (index >= 2) goto end
+  }
+  
