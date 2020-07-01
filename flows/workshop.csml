@@ -18,13 +18,12 @@ name:
 // À toi de jouer maintenant, il va falloir remplir les trous !
 // ############################################################
 // Pour commencer, veuillez supprimer le "/*" à la ligne 21
-/*
 
   goto which_artist
 
 
 which_artist:
-	say Question("Quel artistes aimes tu ? Voici quelques exemples :",
+	say Question("Quel.le artiste aimes-tu ? Voici quelques exemples :",
 	buttons=[
 		Button("Billie Eilish 👩‍🦰") as btnbillie,
 		Button("Eminem 👌") as btneminem,
@@ -51,7 +50,7 @@ which_artist:
 
 display:
   // 6 - Remplace ci-dessous les mots avec les variables
-  do res = Fn("Similar", query= artist )
+  do res = Fn("Similar", query= ????? )
   do cards = []
   if (!res || res == {} || res.length() == 0) {
     say "Je n'ai pas trouvé d'artiste', désolé 😔"

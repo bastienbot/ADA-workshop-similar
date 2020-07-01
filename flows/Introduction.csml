@@ -4,7 +4,7 @@
 // Un chatbot commence toujours par l'étape "start" ci-dessous
 start:
 	say "Salut je suis ton assistant de recherche netflix !"
-  // Une fois qu'on a dit bonjour à l'utilisateur, on va lui demande ce qu'il veut voire
+  // Une fois qu'on a dit bonjour à l'utilisateur, on va lui poser une question
   // direction l'étape "what_type", on utilise "goto" pour se déplacer entre les étapes
 	goto what_type
 
