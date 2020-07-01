@@ -13,11 +13,16 @@ name:
   } else {
     remember name = event
   }
-  goto which_artist
 
 // ############################################################
 // À toi de jouer maintenant, il va falloir remplir les trous !
 // ############################################################
+// Pour commencer, veuillez supprimer le "/*" à la ligne 21
+/*
+
+  goto which_artist
+
+
 which_artist:
 	say Question("Quel artistes aimes tu ? Voici quelques exemples :",
 	buttons=[
