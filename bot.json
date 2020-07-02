@@ -2,7 +2,7 @@
   "id": "53131b40-83f6-4eb8-b7b9-a464d2e8c611",
   "name": "ADA_School_Similar",
   "description": null,
-  "default_flow": "Introduction",
+  "default_flow": "workshop",
   "flows": [
     {
       "name": "Introduction",

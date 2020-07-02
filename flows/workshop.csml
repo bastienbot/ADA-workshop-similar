@@ -1,8 +1,17 @@
 start:
 	say "Salut je suis ta conseillère musicale 👩‍🎤, je connais tous les groupes de musique !"
+  // Les Typing() indique au chatbot qu'il doit faire semblant de taper 😉 On met le nombre de milliseconde entre parenthese
+  say Typing(5000)
+  say Image("https://media.giphy.com/media/dM2xuxnJCg4H6/giphy.gif")
+  say Typing(3000)
   goto name
 
 name:
+  // Ci dessous on va vérfier si la variable `name` existe
+  // si c'est le cas, pas la peine de poser la question et on passe directement à l'étape suivante
+  if (name) {
+    goto which_artist
+  }
   say Question("Avant tout faisons connaissance, comment tu t'appelles ?",
     buttons=[
       Button("Je suis anonyme 🏴‍☠️") as btnanon
@@ -10,50 +19,40 @@ name:
   hold
   if (event match btnanon) {
     say "Ok, ok, pas de soucis, on peut quand même bien s'entendre 👊"
+    remember name = "Anon"
   } else {
     remember name = event
   }
-
-// ############################################################
-// À toi de jouer maintenant, il va falloir remplir les trous !
-// ############################################################
-// Pour commencer, veuillez supprimer le "/*" à la ligne 21
-
   goto which_artist
 
-
 which_artist:
+say Typing(5000)
 	say Question("Quel.le artiste aimes-tu ? Voici quelques exemples :",
 	buttons=[
 		Button("Billie Eilish 👩‍🦰") as btnbillie,
 		Button("Eminem 👌") as btneminem,
 		Button("Nina Simone 🎷") as btnnina
 		])
-  // 1 - Maintenant qu'on a posé la question, il faut donner l'ordre au chatbot d'attendre la réponse
-	?????
-  // 2 - Mets le nom du bouton pour que le chatbot reconnaisse Billie Eilish
-	if (event match ????? ) {
-		remember artist = "billie"
+	hold
+	if (event match btnbillie ) {
+		remember artist = "Billie Eilish"
 	} else if (event match btneminem) {
-    // 3 - Il manque un mot pour que le chatbot se souvienne d'eminem, retrouve le
-		????? artist = "eminem"
+		remember artist = "eminem"
     
-  // 4 - Ci-dessous, il manque carrément tout le bloc concernant Nina Simone 😱
-	} else if ( ????? ????? ????? ) {
-    ????? ????? ????? ?????
+	} else if ( event match btnnina ) {
+    remember artist = "nina simone"
   } else {
-    // 5 - Maintenant, si l'utilisateur a entré un.e artiste différent.e on veut s'en souvenir
-    // Complete la ligne ci-dessous
-    remember artist = ?????
+    remember artist = event
   }
   goto display
 
 display:
-  // 6 - Remplace ci-dessous les mots avec les variables
-  do res = Fn("Similar", query= ????? )
+  say Typing(5000)
+  do res = Fn("Similar", query= artist )
   do cards = []
-  if (!res || res == {} || res.length() == 0) {
+  if (!res || res == {} || res.length() == 0 || res.success == false) {
     say "Je n'ai pas trouvé d'artiste', désolé 😔"
+    goto which_artist
   }
   say "Voici quelques artistes similaires 🤩"
   foreach (val, index) in res {
